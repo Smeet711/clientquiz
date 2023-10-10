@@ -1,0 +1,39 @@
+[
+    {
+      "question": "Which planet is known as the 'Red Planet'?",
+      "answerOptions": [
+        { "answer": "Earth" },
+        { "answer": "Venus" },
+        { "answer": "Mars", "isCorrect": true },
+        { "answer": "Jupiter" }
+      ]
+    },
+    {
+      "question": "What is the name of the closest star to Earth?",
+      "answerOptions": [
+        { "answer": "Venus" },
+        { "answer": "Mars" },
+        { "answer": "The Moon" },
+        { "answer": "The Sun", "isCorrect": true }
+      ]
+    },
+    {
+      "question": "What is a group of stars forming a recognizable pattern called?",
+      "answerOptions": [
+        { "answer": "Galaxy" },
+        { "answer": "Solar System" },
+        { "answer": "Constellation", "isCorrect": true },
+        { "answer": "Nebula" }
+      ]
+    },
+    {
+      "question": "What is the phenomenon where a celestial body is obscured by another in space called?",
+      "answerOptions": [
+        { "answer": "Eclipse", "isCorrect": true },
+        { "answer": "Asteroid" },
+        { "answer": "Meteor Shower" },
+        { "answer": "Supernova" }
+      ]
+    }
+  ]
+  

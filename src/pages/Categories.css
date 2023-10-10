@@ -1,0 +1,10 @@
+.selected {
+    border: 5px solid yellow;
+  }
+
+  .disabled {
+  filter: blur(1px); /* Adjust the blur intensity as needed */
+  cursor: not-allowed; /* Change the cursor to indicate it's not clickable */
+  opacity: 0.6; /* Reduce the opacity to make it visually disabled */
+}
+
