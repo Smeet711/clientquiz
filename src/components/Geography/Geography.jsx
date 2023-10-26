@@ -59,6 +59,19 @@ const Geography = () => {
 
   };
 
+ // to randomize the question fetching
+
+ function shuffleArray(array) {
+  const shuffledArray = [...array];
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray;
+}
+
+
+// to randomize the question fetching
 
 
 
@@ -84,8 +97,16 @@ const Geography = () => {
           const filteredQuestions = responseData.filter((question) =>
           question.category === category
         );
-          setQuestions(filteredQuestions);
-          setAnswerStatus(Array(filteredQuestions.length).fill(null)); // Initialize answerStatus based on fetched data
+          // setQuestions(filteredQuestions);
+          // setAnswerStatus(Array(filteredQuestions.length).fill(null)); // Initialize answerStatus based on fetched data
+
+          const shuffledQuestions = shuffleArray(filteredQuestions);
+          setQuestions(shuffledQuestions);
+          setAnswerStatus(Array(shuffledQuestions.length).fill(null));
+
+
+
+
         } else {
           console.error('Error fetching questions:', response.statusText);
         }
@@ -223,13 +244,13 @@ const Geography = () => {
   };
 
   const handleTimerEnd = () => {
-    alert("Data adding...");
-    // handleSubmitButton();
-    handleCloseAddQuestionModal2()
+    // alert("Data adding...");
+    handleSubmitButton();
+    // handleCloseAddQuestionModal2()
   };
 
   return (
-    <div className="flex flex-col w-screen px-5 h-screen bg-[#1A1A1A] justify-center items-center" style={customStyles}>
+    <div className="  sm:h-[100vh]  h-[110vh]  flex flex-col w-screen px-5  bg-[#1A1A1A] justify-center items-center" style={customStyles}>
 
       <QuizTimer score={score} handleTimerEnd={handleTimerEnd} />
 
@@ -238,15 +259,15 @@ const Geography = () => {
       {questions.length > 0 && currentQuestion < questions.length && (
         <div className="flex flex-col justify-center items-center  w-full">
           <h4 className="mt-10 text-xl text-white/60">
-            Question {currentQuestion + 1} of {questions.length}
+            {/* Question {currentQuestion + 1} of {questions.length} */}
           </h4>
-          <div className="mt-4 text-2xl text-white text-center">
+          <div className="mt-4 text-xl text-white text-center">
           {currentQuestion + 1}. {questions[currentQuestion].question}
           </div>
         </div>
       )}
       {currentQuestion < questions.length && (
-        <div className="grid grid-cols-2  gap-x-4 gap-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2  gap-x-4 gap-y-4">
           {questions[currentQuestion].answerOptions.map((answer, index) => (
             <div
               key={index}
@@ -255,7 +276,7 @@ const Geography = () => {
                   handleAnswerOption(answer.answer);
                 }
               }}
-              className={` "transform -skew-x-6   flex items-center w-[400px] py-4 pl-5 m-2 ml-0 space-x-2 border-2 cursor-pointer ${
+              className={` "transform -skew-x-6   flex items-center w-[300px] py-4 pl-5 m-2 ml-0 space-x-2 border-2 cursor-pointer ${
                 isChecked && answerStatus[currentQuestion] !== null
                   ? answer.isCorrect
                     ? 'bg-green-300'
@@ -285,11 +306,14 @@ const Geography = () => {
               </p>
             </div>
           ))}
-          <div className="flex justify-between w-full mt-4 text-white">
-            <div className="flex justify-between w-full mt-4 space-x-4">
+        
+        </div>
+      )}
+  <div className="flex justify-center w-full mt-4 text-white">
+            <div className="flex justify-center w-full mt-4 space-x-4">
               <button
                 onClick={handleCheck}
-                className={`flex-1 text-white bg-orange-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ${
+                className={`w-[150px] text-white bg-orange-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ${
                   !isOptionSelected ? 'cursor-not-allowed' : ''
                 }`}
               >
@@ -297,15 +321,12 @@ const Geography = () => {
               </button>
               <button
                 onClick={handleNext}
-                className={`flex-1 py-3 bg-indigo-600 rounded-lg text-white`}
+                className={`w-[150px] py-3 font-medium bg-indigo-600 rounded-lg text-white`}
               >
                 {currentQuestion + 1 === questions.length ? 'Finish' : 'Next'}
               </button>
             </div>
           </div>
-        </div>
-      )}
-
       {showScore && (
         <button
           onClick={openModal}

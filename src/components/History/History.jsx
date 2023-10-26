@@ -181,6 +181,7 @@ const History = () => {
 
   const handleSubmitButton = async () => {
    
+    console.log("Handling timer end...");
 
     for (let i = 0; i < questions.length; i++) {
       if (answerStatus[i]) {
@@ -223,13 +224,14 @@ const History = () => {
   };
 
   const handleTimerEnd = () => {
-    alert("Data adding...");
+    // alert("Data adding...");
     // handleSubmitButton();
-    handleCloseAddQuestionModal2()
+    // handleCloseAddQuestionModal2()
+    handleSubmitButton(); 
   };
 
   return (
-    <div className="flex flex-col w-screen px-5 h-screen bg-[#1A1A1A] justify-center items-center" style={customStyles}>
+    <div className="  sm:h-[100vh]  h-[110vh]   flex flex-col w-screen px-5  bg-[#1A1A1A] justify-center items-center" style={customStyles}>
 
       <QuizTimer score={score} handleTimerEnd={handleTimerEnd} />
 
@@ -238,15 +240,15 @@ const History = () => {
       {questions.length > 0 && currentQuestion < questions.length && (
         <div className="flex flex-col justify-center items-center  w-full">
           <h4 className="mt-10 text-xl text-white/60">
-            Question {currentQuestion + 1} of {questions.length}
+            {/* Question {currentQuestion + 1} of {questions.length} */}
           </h4>
-          <div className="mt-4 text-2xl text-white text-center">
+          <div className="mt-4 text-xl text-white text-center">
           {currentQuestion + 1}.  {questions[currentQuestion].question}
           </div>
         </div>
       )}
       {currentQuestion < questions.length && (
-        <div className="grid grid-cols-2  gap-x-4 gap-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2  gap-x-4 gap-y-4">
           {questions[currentQuestion].answerOptions.map((answer, index) => (
             <div
               key={index}
@@ -255,7 +257,7 @@ const History = () => {
                   handleAnswerOption(answer.answer);
                 }
               }}
-              className={` "transform -skew-x-6 flex items-center w-[400px] py-4 pl-5 m-2 ml-0 space-x-2 border-2 cursor-pointer ${
+              className={` "transform -skew-x-6 flex items-center w-[300px] py-4 pl-5 m-2 ml-0 space-x-2 border-2 cursor-pointer ${
                 isChecked && answerStatus[currentQuestion] !== null
                   ? answer.isCorrect
                     ? 'bg-green-300'
@@ -285,11 +287,15 @@ const History = () => {
               </p>
             </div>
           ))}
-          <div className="flex justify-between w-full mt-4 text-white">
-            <div className="flex justify-between w-full mt-4 space-x-4">
+         
+        </div>
+      )}
+
+<div className="flex justify-center w-full mt-4 text-white">
+            <div className="flex justify-center w-full mt-4 space-x-4">
               <button
                 onClick={handleCheck}
-                className={`flex-1 text-white bg-orange-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ${
+                className={`w-[150px] text-white bg-orange-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ${
                   !isOptionSelected ? 'cursor-not-allowed' : ''
                 }`}
               >
@@ -297,14 +303,12 @@ const History = () => {
               </button>
               <button
                 onClick={handleNext}
-                className={`flex-1 py-3 bg-indigo-600 rounded-lg text-white`}
+                className={`w-[150px] py-3 font-medium bg-indigo-600 rounded-lg text-white`}
               >
                 {currentQuestion + 1 === questions.length ? 'Finish' : 'Next'}
               </button>
             </div>
           </div>
-        </div>
-      )}
 
       {showScore && (
         <button

@@ -10,6 +10,59 @@ import "./Sidebar.css";
 const Sidebar = () => {
   const [isAddQuestionModalOpen, setIsAddQuestionModalOpen] = useState(false);
   const [activeMenuItem, setActiveMenuItem] = useState("");
+  const [file, setFile] = useState(null);
+
+  const showToastMessage = () => {
+    toast.success('CSV added !', {
+        position: toast.POSITION.TOP_RIGHT
+    });
+};
+
+
+// handling csv upload starts 
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+};
+
+const handleUpload = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('file', file);
+   
+
+
+    try {
+        const response = await fetch('https://backup-quiz-server.onrender.com/api/upload-csv-file', {
+            method: 'POST',
+            body: formData,
+        });
+
+
+
+        if (response.ok) {
+          // showToastMessage()
+            alert('CSV added to the database successfully!');
+
+            
+            
+        } else {
+            alert('Error: CSV upload failed.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while uploading the CSV.');
+    }
+};
+
+
+// handling csv uploads ends
+
+
+
+
+
+
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -39,6 +92,15 @@ const Sidebar = () => {
     setActiveMenuItem("dashboard");
   };
 
+
+const gotocat = ()=>{
+  navigate('/admincat')
+  setActiveMenuItem("category")
+}
+
+
+
+
   useEffect(() => {
     // Set the active menu item based on the current pathname
     const pathname = location.pathname;
@@ -46,7 +108,10 @@ const Sidebar = () => {
       setActiveMenuItem("doctors");
     } else if (pathname === "/dashboard") {
       setActiveMenuItem("dashboard");
-    } else {
+    } else if(pathname === "/admincat"){
+      setActiveMenuItem("category")
+    }
+    else {
       setActiveMenuItem("");
     }
   }, [location.pathname]);
@@ -115,9 +180,11 @@ const Sidebar = () => {
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            <a
+                href=""
+                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white  dark:hover:bg-gray-700 group ${
+                  activeMenuItem === "category" ? "bg-blue-200" : ""
+                }`}
               >
                 <svg
                   class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -128,10 +195,17 @@ const Sidebar = () => {
                 >
                   <path d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z" />
                 </svg>
-                <span class="flex-1 ml-3 whitespace-nowrap">Inbox</span>
-                <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                  3
+                <span
+                  className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white  dark:hover:bg-gray-700 group ${
+                    activeMenuItem === "category" ? "bg-blue-200" : ""
+                  }`}
+                  onClick={gotocat}
+                >
+                  Category
                 </span>
+                {/* <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
+               { categoryCount }
+                </span> */}
               </a>
             </li>
             <li>
@@ -233,6 +307,62 @@ const Sidebar = () => {
                 />
               </svg>
             </button>
+
+
+
+{/* csv upload starts  */}
+
+{/* <div class="flex items-center justify-center  w-full">
+    <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+            </svg>
+            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">CSV File (MAX. 800x400px)</p>
+        </div>
+          <input id="dropzone-file" type="file" class="hidden" accept=".csv" /> 
+        
+    </label>
+    
+</div>  */}
+
+{/* csv uplaod ends  */}
+
+
+
+
+{/* <form
+        action="http://localhost:8000/api/upload-csv-file"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        
+        <input type="file" name="file" />
+        <input type="submit" value="Upload"  className=" w-[100px] m-[15px] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+ />
+      </form> */}
+
+
+<form
+            onSubmit={handleUpload}
+            encType="multipart/form-data"
+        >
+            <input type="file" name="file" onChange={handleFileChange} />
+            {/* <input
+                type="submit"
+                value="Upload"
+                className="w-[100px] m-[15px] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            /> */}
+             <button  type="submit"
+                value="Upload"
+                className="w-[100px] m-[15px] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Upload</button>
+                <ToastContainer/>
+        </form>
+      
+
+
+            
           </ul>
         </div>
       </aside>

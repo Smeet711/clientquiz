@@ -126,19 +126,7 @@ const AddQuestion = ({ isOpen, onClose, onAddQuestion }) => {
             onChange={(e) => setCategory(e.target.value)}
             className="w-full border rounded-md py-2 px-3 mt-1"
           />
-          {/* <select
-            // id="category"
-            // value={selectedCategory}
-            // onChange={handleCategoryChange}
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-          >
-            <option selected="">Select Category</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="History">History</option>
-            <option value="Geography">Geography</option>
-            <option value="Science">Science</option>
-            <option value="Astronomy">Astronomy</option>
-          </select> */}
+        
         </label>
         <h3 className="text-lg font-medium mb-2">Answer Options:</h3>
         {answerOptions.map((option, index) => (

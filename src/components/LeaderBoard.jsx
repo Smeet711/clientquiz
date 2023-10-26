@@ -2,14 +2,19 @@ import React, { useState, useEffect,useRef } from "react";
 import Image from "./king.png";
 import { useNavigate, useParams } from "react-router-dom";
 import { BeatLoader } from 'react-spinners';
+import back from './leaderbg.png'
+import './Leader.css'
 
 const LeaderBoard = () => {
 
   const customStyles = {
-    fontFamily: 'Roboto, sans-serif'
+    fontFamily: 'Roboto, sans-serif',
+    backgroundImage: `url(${back})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    fontSize: '20px',
   }
-
-
 
 
 
@@ -180,6 +185,7 @@ const load = () => {
         console.log("POST request response:", data);
         const categoryLeaderboard2 = data.categoryLeaderboard || [];
         setFilteredData(categoryLeaderboard2);
+      
         setShowFilteredData(true);
         setIsSuccess(true);
         setIsLoading(false);
@@ -353,27 +359,34 @@ const load = () => {
 
 
 
+const top10Data = leaderboardData
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 7);
+
+    const filtertop10Data = filteredData.sort((a, b) => b.score - a.score);
 
 
-
-
-
-
+const gotohome = ()=>{
+  navigate('/home')
+}
+const playagain = ()=>{
+  navigate('/cat')
+}
 
   
 
   return (
     <>
 
-{console.log(top3Doctors)}
+{/* {console.log(top3Doctors)} */}
 
 
 
 
+<section className="" style={customStyles}>
 
 
-
-<main class="max-w-6xl mx-auto pt-1 pb-36 px-8 w-[100vw] overflow-x-hidden">
+<main class="max-w-6xl mx-auto pt-1 pb-36 px-8 w-[100vw]  overflow-x-hidden">
 <button
           onClick={playOther}
           class="py-3 px-5 mb-1  mt-1 text-sm text-white font-medium text-center bg-green-950 rounded-lg  sm:w-fit "
@@ -381,10 +394,10 @@ const load = () => {
           Back to Home
         </button>
 
-        <h1 class="text-2xl font-semibold mb-6 lg:text-5xl"><span class="text-red-400">Leaderboard</span> </h1>
+        <h1 class="text-2xl font-semibold mb-6 lg:text-5xl"><span class="text-red-800">Leaderboard</span> </h1>
 
   <div class="max-w-md mx-auto mb-14 text-center">
-    <h1 class="text-4xl font-semibold mb-6 lg:text-5xl"><span class="text-indigo-600">Top 3 Players</span> of {category}</h1>
+    <h1 class="text-4xl font-semibold mb-6 lg:text-5xl"><span class="text-yellow-500">Top 3 Players</span> of {category}</h1>
     {/* <p class="text-xl text-gray-500 font-medium">Choose a plan that works best for you and your team.</p> */}
   </div>
   
@@ -395,11 +408,11 @@ const load = () => {
       <img src={Image}  alt="" class="rounded-3xl w-20 h-20" />
         <div class="ml-5">
           {/* <span class="block text-2xl font-semibold">{topDoctor2.doctorName}</span> */}
-          {top3Doctors.length > 0  ? <span class="block text-3xl font-semibold ">{top3Doctors[1].doctorName}</span>  : <p>...</p>}
+          {top3Doctors.length > 2  ? <span class="block text-3xl font-semibold ">Dr. {top3Doctors[1].doctorName}</span>  : <p>...</p>}
           {/* <span><span class="font-medium text-gray-500 text-xl align-top">$&thinsp;</span><span class="text-3xl font-bold">10 </span></span><span class="text-gray-500 font-medium">/ user</span> */}
         </div>
       </div>
-      <ul class="mb-7 font-medium text-gray-500">
+      {/* <ul class="mb-7 font-medium text-gray-500">
         <li class="flex text-lg mb-2">
           <img src="https://res.cloudinary.com/williamsondesign/check-grey.svg" />
           <span class="ml-3"> <span class="text-black"></span></span>
@@ -412,10 +425,10 @@ const load = () => {
           <img src="https://res.cloudinary.com/williamsondesign/check-grey.svg" />
           <span class="ml-3"><span class="text-black"></span> </span>
         </li>
-      </ul>
+      </ul> */}
       <a href="#/" class="flex justify-center items-center bg-indigo-600 rounded-xl py-5 px-4 text-center text-white text-xl">
       {/* Score :- {topDoctor2.score} */}
-      {top3Doctors.length > 0  ? <span class="block text-3xl font-semibold text-white"> Score :- {top3Doctors[1].score}</span>  : <p>...</p>}
+      {top3Doctors.length > 2  ? <span class="block text-3xl font-semibold text-white"> Score : {top3Doctors[1].score}</span>  : <p>...</p>}
         {/* <img src="https://res.cloudinary.com/williamsondesign/arrow-right.svg" class="ml-2" /> */}
        
       </a>
@@ -428,12 +441,12 @@ const load = () => {
         
           {/* <span class="block text-3xl font-semibold text-white">{top3Doctors[0].doctorName}</span> */}
 
-          {top3Doctors.length > 0  ? <span class="block text-3xl font-semibold text-white">{top3Doctors[0].doctorName}</span>  : <p>...</p>}
+          {top3Doctors.length > 2  ? <span class="block text-3xl font-semibold text-white">Dr. {top3Doctors[0].doctorName}</span>  : <p>...</p>}
 
           {/* <span><span class="font-medium text-xl align-top">$&thinsp;</span><span class="text-3xl font-bold text-white">24 </span></span><span class="font-medium">/ user</span> */}
         </div>
       </div>
-      <ul class="mb-10 font-medium text-xl">
+      {/* <ul class="mb-10 font-medium text-xl">
         <li class="flex mb-6">
           <img src="https://res.cloudinary.com/williamsondesign/check-white.svg" />
           <span class="ml-3"> <span class="text-white"></span></span>
@@ -446,10 +459,10 @@ const load = () => {
           <img src="https://res.cloudinary.com/williamsondesign/check-white.svg" />
           <span class="ml-3"><span class="text-white"></span> </span>
         </li>
-      </ul>
+      </ul> */}
       <a href="#/" class="flex justify-center items-center bg-indigo-600 rounded-xl py-6 px-4 text-center text-white text-2xl">
        {/* Score :-  {topDoctor.score} */}
-       {top3Doctors.length > 0  ? <span class="block text-3xl font-semibold text-white"> Score :- {top3Doctors[0].score}</span>  : <p>...</p>}
+       {top3Doctors.length > 2  ? <span class="block text-3xl font-semibold text-white"> Score : {top3Doctors[0].score}</span>  : <p>...</p>}
         {/* <img src="https://res.cloudinary.com/williamsondesign/arrow-right.svg" class="ml-2" /> */}
       </a>
     </div>
@@ -459,11 +472,11 @@ const load = () => {
       <img src={Image}  alt="" class="rounded-3xl w-20 h-20" />
         <div class="ml-5">
           {/* <span class="block text-2xl font-semibold">{topDoctor3.doctorName}</span> */}
-          {top3Doctors.length > 0  ? <span class="block text-3xl font-semibold ">{top3Doctors[2].doctorName}</span>  : <p>...</p>}
+          {top3Doctors.length > 2  ? <span class="block text-3xl font-semibold ">Dr. {top3Doctors[2].doctorName}</span>  : <p>...</p>}
           {/* <span><span class="font-medium text-gray-500 text-xl align-top">$&thinsp;</span><span class="text-3xl font-bold">35 </span></span><span class="text-gray-500 font-medium">/ user</span> */}
         </div>
       </div>
-      <ul class="mb-7 font-medium text-gray-500">
+      {/* <ul class="mb-7 font-medium text-gray-500">
         <li class="flex text-lg mb-2">
           <img src="https://res.cloudinary.com/williamsondesign/check-grey.svg" />
           <span class="ml-3"><span class="text-black"></span></span>
@@ -476,10 +489,10 @@ const load = () => {
           <img src="https://res.cloudinary.com/williamsondesign/check-grey.svg" />
           <span class="ml-3"><span class="text-black"></span> </span>
         </li>
-      </ul>
+      </ul> */}
       <a href="#/" class="flex justify-center items-center bg-indigo-600 rounded-xl py-5 px-4 text-center text-white text-xl">
        {/* Score :- {topDoctor3.score} */}
-       {top3Doctors.length > 0  ? <span class="block text-3xl font-semibold text-white"> Score :- {top3Doctors[2].score}</span>  : <p>...</p>}
+       {top3Doctors.length > 2  ? <span class="block text-3xl font-semibold text-white"> Score : {top3Doctors[2].score}</span>  : <p>...</p>}
         {/* <img src="https://res.cloudinary.com/williamsondesign/arrow-right.svg" class="ml-2" /> */}
       </a>
     </div>
@@ -500,7 +513,7 @@ const load = () => {
    
 <div className="w-[100vw] ">
       <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md bg-gradient-to-b ">
-        <h1 className="text-center text-white font-bold ">LeaderBoard </h1>
+        <h1 className="text-2xl font-semibold mb-6 lg:text-5xl ">LeaderBoard </h1>
         {/* <button
           onClick={playOther}
           class="py-3 px-5 mb-10  mt-10 text-sm text-white font-medium text-center bg-green-950 rounded-lg  sm:w-fit "
@@ -548,24 +561,42 @@ const load = () => {
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
           >
             <option selected="">Select State</option>
-            <option value="Goa">Goa</option>
-                      <option value="Maharashtra">Maharashtra</option>
-                      <option value="Gujarat">Gujarat</option>
-                      <option value="Uttar Pradesh">Uttar Pradesh</option>
-                      <option value="Haryana">Haryana</option>
-                      <option value="Sikkim">Sikkim</option>
-                      <option value="Uttarkand">Uttarkand</option>
-                      <option value="Karnataka">Karnataka</option>
-                      <option value="Tamil Nadu">Tamil Nadu</option>
-                      <option value="Madya Pradesh">Madya Pradesh</option>
-                      <option value="Rajasthan">Rajasthan</option>
-                      <option value="Punjab">Punjab</option>
-                      <option value="Jharkand">Jharkand</option>
-                      <option value="Chattisgarh">Chattisgarh</option>
-                      <option value="Kerala">Kerala</option>
-                      <option value="Telegana">Telegana</option>
-                      <option value="Andra Pradesh">Andra Pradesh</option>
-                      <option value="Bihar">Bihar</option>
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+<option value="Assam">Assam</option>
+<option value="Bihar">Bihar</option>
+<option value="Chhattisgarh">Chhattisgarh</option>
+<option value="Goa">Goa</option>
+<option value="Gujarat">Gujarat</option>
+<option value="Haryana">Haryana</option>
+<option value="Himachal Pradesh">Himachal Pradesh</option>
+<option value="Jharkhand">Jharkhand</option>
+<option value="Karnataka">Karnataka</option>
+<option value="Kerala">Kerala</option>
+<option value="Madhya Pradesh">Madhya Pradesh</option>
+<option value="Maharashtra">Maharashtra</option>
+<option value="Manipur">Manipur</option>
+<option value="Meghalaya">Meghalaya</option>
+<option value="Mizoram">Mizoram</option>
+<option value="Nagaland">Nagaland</option>
+<option value="Odisha">Odisha</option>
+<option value="Punjab">Punjab</option>
+<option value="Rajasthan">Rajasthan</option>
+<option value="Sikkim">Sikkim</option>
+<option value="Tamil Nadu">Tamil Nadu</option>
+<option value="Telangana">Telangana</option>
+<option value="Tripura">Tripura</option>
+<option value="Uttar Pradesh">Uttar Pradesh</option>
+<option value="Uttarakhand">Uttarakhand</option>
+<option value="West Bengal">West Bengal</option>
+<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+  <option value="Chandigarh">Chandigarh</option>
+  <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+  <option value="Delhi (National Capital Territory of Delhi)">Delhi (National Capital Territory of Delhi)</option>
+  <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+  <option value="Ladakh">Ladakh</option>
+  <option value="Lakshadweep">Lakshadweep</option>
+  <option value="Puducherry">Puducherry</option>
           </select>
         </div>
 
@@ -586,103 +617,158 @@ const load = () => {
 
 
        <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md bg-gradient-to-b">
-  {/* <h2 className="text-2xl  font-semibold leading-tight text-center" >{selectedCategory}</h2> */}
+  
 
-  <h1  ref={topPlayerRef} class="text-4xl font-semibold mb-6 lg:text-5xl"><span class="text-indigo-600">Top  Players</span> of {selectedCategory}</h1>
+  <h1  ref={topPlayerRef} class="text-4xl font-semibold mb-6 lg:text-5xl"><span class="text-yellow-500">Top  Players</span> of {selectedCategory} in <span className="text-orange-400">{selectedState}</span> </h1>
 
 
-  <table className="w-full border-collapse border border-gray-300 dark:border-gray-700">
-    <thead>
-      <tr>
-        <th className="py-2 text-sm font-medium text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700">
-          Doctor Name
-        </th>
-        <th className="py-2 text-sm font-medium text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700">
-          Score
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {filteredData
-        .sort((a, b) => b.score - a.score) // Sort by score in descending order
-        .map((doctor, index) => (
-          <tr key={index}>
-            <td className="py-3 sm:py-4 border border-gray-300 dark:border-gray-700 text-center">
-              <div className="flex items-center justify-center">
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-gray-900 truncate dark:text-white" style={customStyles}>
-                    {doctor.doctorName}
-                  </p>
-                </div>
-              </div>
-            </td>
-            <td
-              className={`py-3 sm:py-4 border border-gray-300 dark:border-gray-700 ${
-                index < 3 ? 'bg-yellow-200' : ''
-              } text-center`}
-            >
-              <div className="flex items-center justify-center">
-                {doctor.score}
-                {index < 3 && (
-                  <img src={Image} alt="Crown" className="w-5 h-5 ml-2" />
-                )}
-              </div>
-            </td>
-          </tr>
-        ))}
-    </tbody>
-  </table>
+  <div className="container">
+      <div className="maindiv">
+        <div id="header">
+          <h1>Ranking</h1>
+        </div>
+        <div id="leaderboard">
+          <div className="ribbon"></div>
+          <table>
+            {filtertop10Data.slice(0, 7).map((doctor, index) => (
+              <tr key={index}>
+                <td className="number">{index + 1}</td>
+                <td className="name">
+                 Dr. {doctor.doctorName}
+                </td>
+               
+                <td className={`points ${index < 3 ? '' : ''}`}>
+                {index < 3 ? Math.floor(doctor.score) : doctor.score.toFixed(0)}{' '}
+                  {index < 3 && (
+                    <img
+                      className="gold-medal"
+                      src={Image}
+                      alt="gold medal"
+                    />
+                  )}
+                </td>
+              </tr>
+            ))}
+          </table>
+          
+        </div>
+      </div>
+    </div>
 </div>
 
       ) : (
-        // Show the original leaderboardData when showFilteredData is false
+       
         <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md bg-gradient-to-b">
-          {/* <h1 className="text-2xl  font-semibold leading-tight text-centerd mb-10">{category}</h1> */}
-          <h1  class="text-4xl font-semibold mb-6 lg:text-5xl"><span class="text-indigo-600">Top  Players</span> of {category} </h1>
-          <table className="w-full border-collapse border border-gray-300 dark:border-gray-700">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th className="py-2 text-sm font-medium text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700">
-                  Doctor Name
-                </th>
-                <th className="py-2 text-sm font-medium text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700">
-                  Score
-                </th>
+          
+          <h1  class="text-4xl font-semibold mb-6 lg:text-5xl"><span class="text-yellow-500">Top  Players</span> of {category} </h1>
+          <div className="container">
+<div className="maindiv ">
+      <div id="header">
+        <h1>Ranking</h1>
+       
+      </div>
+      <div id="leaderboard">
+        <div class="ribbon"></div>
+        
+
+<table>
+            {top10Data.map((doctor, index) => (
+              <tr key={index}>
+                <td className="number">{index + 1}</td>
+                <td className="name">Dr. {doctor.doctorName}</td>
+                <td className="name">{doctor.state}</td>
+                <td className="points">
+                {index < 3 ? Math.floor(doctor.score) : doctor.score.toFixed(0)}{' '}
+              
+                  {index < 3 && (
+                    <img
+                      className="gold-medal"
+                      src={Image}
+                      alt="gold medal"
+                    />
+                  )}
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {leaderboardData
-                .sort((a, b) => b.score - a.score) // Sort by score in descending order
-                .map((doctor, index) => (
-                  <tr key={index}>
-                    <td className="py-3 sm:py-4 border border-gray-300 dark:border-gray-700 text-center">
-                      <div className="flex items-center justify-center">
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-semibold text-gray-900 truncate dark:text-white" style={customStyles}>
-                            {doctor.doctorName}
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      className={`py-3 sm:py-4 border border-gray-300 dark:border-gray-700 ${
-                        index < 3 ? 'bg-yellow-200' : ''
-                      } text-center`}
-                    >
-                      <div className="flex items-center justify-center">
-                        {doctor.score}
-                        {index < 3 && (
-                          <img src={Image} alt="Crown" className="w-5 h-5 ml-2" />
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
+            ))}
           </table>
+
+      
+      </div>
+      </div>
+
+      </div>
         </div>
       )}
 </div>
+</section>
+
+
+
+{/* // new ui of table starts  */}
+{/* <div className="container">
+<div className="maindiv ">
+      <div id="header">
+        <h1>Ranking</h1>
+       
+      </div>
+      <div id="leaderboard">
+        <div class="ribbon"></div>
+        
+
+<table>
+            {top10Data.map((doctor, index) => (
+              <tr key={index}>
+                <td className="number">{index + 1}</td>
+                <td className="name">{doctor.doctorName}</td>
+                <td className="points">
+                  {doctor.score.toFixed(3)}{' '}
+                  {index < 3 && (
+                    <img
+                      className="gold-medal"
+                      src={Image}
+                      alt="gold medal"
+                    />
+                  )}
+                </td>
+              </tr>
+            ))}
+          </table>
+
+
+
+
+
+
+
+
+
+
+        <div id="buttons">
+          <button class="exit">Exit</button>
+          <button class="continue">Continue</button>
+        </div>
+      </div>
+      </div>
+
+      </div> */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     </>
   );

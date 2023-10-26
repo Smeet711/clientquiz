@@ -128,42 +128,52 @@ const [inputCityValue, setInputCityValue] = useState('');
  
 
 
-   <section class="h-[100vh]">
+   <section class="h-[200vh]">
   <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
       <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-white dark:text-white">Welcome to the Quiz</h2>
       <p class="mb-8 lg:mb-16 font-light text-center text-black dark:text-gray-400 sm:text-xl">Let's Play.</p>
-      <form action="#" class="space-y-8">
+      <form action="#" class="space-y-8 ">
         <div className=''>
           <div>
-              <label for="name" class="block mb-2 text-sm font-medium  text-white dark:text-gray-300">Your Name</label>
+              <label for="name" class="block mb-2 text-sm font-medium  text-white dark:text-gray-300">Doctor Name</label>
               <input type="name" value={inputNameValue} onChange={handleInputChange} id="name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Enter Name" required/>
           </div>
           <div>
-              <label for="city" class="block mb-2 text-sm font-medium text-white dark:text-gray-300">City</label>
+              <label for="city" class="block mb-2 mt-8 text-sm font-medium text-white dark:text-gray-300">City</label>
               <input type="text" value={inputCityValue} onChange={handleInputChange2} id="subject" class="block p-3  text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Enter Your City" required/>
           </div>
           <div>
-                  <label for="state" class="block mb-2 text-sm font-medium text-white dark:text-white">State</label>
+                  <label for="state" class="block mb-2 mt-8 text-sm font-medium text-white dark:text-white">State</label>
                   <select value={selectedOption} onChange={handleDropdownChange} id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                       <option selected="">Select State</option>
-                      <option value="Goa">Goa</option>
-                      <option value="Maharashtra">Maharashtra</option>
-                      <option value="Gujarat">Gujarat</option>
-                      <option value="Uttar Pradesh">Uttar Pradesh</option>
-                      <option value="Haryana">Haryana</option>
-                      <option value="Sikkim">Sikkim</option>
-                      <option value="Uttarkand">Uttarkand</option>
-                      <option value="Karnataka">Karnataka</option>
-                      <option value="Tamil Nadu">Tamil Nadu</option>
-                      <option value="Madya Pradesh">Madya Pradesh</option>
-                      <option value="Rajasthan">Rajasthan</option>
-                      <option value="Punjab">Punjab</option>
-                      <option value="Jharkand">Jharkand</option>
-                      <option value="Chattisgarh">Chattisgarh</option>
-                      <option value="Kerala">Kerala</option>
-                      <option value="Telegana">Telegana</option>
-                      <option value="Andra Pradesh">Andra Pradesh</option>
-                      <option value="Bihar">Bihar</option>
+                      <option value="Andhra Pradesh">Andhra Pradesh</option>
+<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+<option value="Assam">Assam</option>
+<option value="Bihar">Bihar</option>
+<option value="Chhattisgarh">Chhattisgarh</option>
+<option value="Goa">Goa</option>
+<option value="Gujarat">Gujarat</option>
+<option value="Haryana">Haryana</option>
+<option value="Himachal Pradesh">Himachal Pradesh</option>
+<option value="Jharkhand">Jharkhand</option>
+<option value="Karnataka">Karnataka</option>
+<option value="Kerala">Kerala</option>
+<option value="Madhya Pradesh">Madhya Pradesh</option>
+<option value="Maharashtra">Maharashtra</option>
+<option value="Manipur">Manipur</option>
+<option value="Meghalaya">Meghalaya</option>
+<option value="Mizoram">Mizoram</option>
+<option value="Nagaland">Nagaland</option>
+<option value="Odisha">Odisha</option>
+<option value="Punjab">Punjab</option>
+<option value="Rajasthan">Rajasthan</option>
+<option value="Sikkim">Sikkim</option>
+<option value="Tamil Nadu">Tamil Nadu</option>
+<option value="Telangana">Telangana</option>
+<option value="Tripura">Tripura</option>
+<option value="Uttar Pradesh">Uttar Pradesh</option>
+<option value="Uttarakhand">Uttarakhand</option>
+<option value="West Bengal">West Bengal</option>
                   </select>
               </div>
               </div>

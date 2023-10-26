@@ -2,8 +2,20 @@ import React, { useState, useEffect } from 'react';
 import './Categories.css';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import back from './catbg.png'
+import ques from './ques.png'
+import brand from './sompraz.png'
 
 const Categories = () => {
+  
+  const customStyles = {
+    backgroundImage: `url(${back})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    fontSize: '20px',
+  };
+
   const navigate = useNavigate();
   const { doctorId } = useParams();
 
@@ -104,29 +116,36 @@ const Categories = () => {
   };
 
   return (
-    <div className="container mx-auto mt-8 p-8 bg-gradient-to-b from-indigo-900 to-indigo-950 min-h-screen text-white">
-      <h1 className="text-4xl font-bold text-center mb-8">Choose a Quiz Category</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <section className='' style={customStyles}> 
+    
+<img className=' w-[100px]  ml-2 absolute left-0 ' src={ques} alt="" />
+
+<img className=' w-[100px] mr-2 mt-5 absolute right-0' src={brand} alt="" />
+
+    <div className="  h-[220vh] sm:h-[150vh]">
+      <h1 className=" relative top-10   text-4xl font-bold text-center p-[50px] mb-0">Choose a Quiz Category</h1>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 m-5">
        
         {Object.entries(categoryStatus).map(([category, categoryData], index) => (
           
           <div
             key={index}
-            className={`p-6 rounded cursor-pointer transform transition-transform ${selectedClass(index + 1)} ${
+            className={`p-6 rounded border-4 cursor-pointer transform transition-transform ${selectedClass(index + 1)} ${
               categoryData.isPlayed ? 'opacity-50 cursor-not-allowed' : ''
             }`}
             onClick={() => handleDivClick(index + 1, category)}
           >
            
-            <div className="text-xl font-semibold text-center">{category}</div>
+            <div className="text-2xl font-semibold text-center">{category}</div>
             {categoryData.isPlayed ? (
               <div className="text-sm text-gray-500 mt-2 text-center">Already Played</div>
             ) : null}
           </div>
         ))}
       </div>
-
+<div className='flex justify-center '>
       <button
         onClick={gotoquizpage}
         type="button"
@@ -135,7 +154,9 @@ const Categories = () => {
       >
         Start Quiz
       </button>
+      </div>
     </div>
+    </section>
   );
 };
 

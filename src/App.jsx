@@ -9,7 +9,7 @@ import LeaderBoard from "./components/LeaderBoard";
 import Astronomy from "./components/Astronomy/Astronomy";
 import LoginAd from "./AdminPanel/Login/LoginAdmin";
 import Dashboard from "./AdminPanel/Dashboard/Dashboard";
-import Page2 from "./AdminPanel/Dashboard/Page2";
+// import Page2 from "./AdminPanel/Dashboard/Page2";
 import History from "./components/History/History";
 import Literature from "./components/Literature/Literature";
 import Mathematics from "./components/Mathematics/Mathematics";
@@ -17,6 +17,8 @@ import Science from "./components/Science/Science";
 import Technology from "./components/Technology/Technology";
 import Wildlife from "./components/Wildlife/Wildlife";
 import Geography from "./components/Geography/Geography";
+import DoctorsDetails from "./AdminPanel/Dashboard/DoctorsDetails";
+import AdminCategory from "./AdminPanel/Dashboard/pages/AdminCategory";
 
 const App = () => {
   return (
@@ -27,7 +29,11 @@ const App = () => {
 
           <Route path="/loginadmin" element={<LoginAd />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/page2" element={<Page2 />} />
+          <Route path="/page2" element={<DoctorsDetails/>} />
+          <Route path="/admincat" element={<AdminCategory/>} />
+
+
+
 
           <Route path="/home" element={<Home />} />
           <Route path="/intro1" element={<Intro1 />} />
